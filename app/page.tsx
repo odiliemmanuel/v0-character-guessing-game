@@ -1,5 +1,6 @@
-import { GameContainer } from "@/components/game/game-container"
+import { Game } from '../components/game/Game';
+import '../styles/game.css';
 
 export default function Home() {
-  return <GameContainer />
+  return <Game />;
 }
