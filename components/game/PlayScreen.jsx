@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function PlayScreen({
   currentQuestion,
@@ -16,6 +16,11 @@ export function PlayScreen({
   onAnswer
 }) {
   const [imageError, setImageError] = useState(false);
+  
+  // Reset image error when question changes
+  useEffect(() => {
+    setImageError(false);
+  }, [currentQuestion]);
   
   const timerPercentage = (timeLeft / maxTime) * 100;
   const timerClass = timeLeft <= 3 ? 'danger' : timeLeft <= 7 ? 'warning' : '';
@@ -66,7 +71,6 @@ export function PlayScreen({
               alt="Guess this character"
               className="character-image"
               onError={() => setImageError(true)}
-              crossOrigin="anonymous"
             />
           ) : (
             <span className="character-placeholder">?</span>
