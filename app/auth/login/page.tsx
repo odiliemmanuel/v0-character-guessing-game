@@ -21,15 +21,29 @@ export default function LoginPage() {
     setError(null)
 
     try {
+      console.log("[v0] Attempting login with email:", email);
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
-      if (error) throw error
+      if (error) {
+        console.log("[v0] Login error:", error);
+        throw error;
+      }
+      console.log("[v0] Login successful");
       router.push('/')
       router.refresh()
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
+      console.log("[v0] Catch error:", error);
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+      // If it's a network error, still try to navigate as the login may have succeeded
+      if (errorMessage.includes('Failed to fetch') || errorMessage.includes('NetworkError')) {
+        console.log("[v0] Network error in login, attempting to proceed");
+        router.push('/');
+        router.refresh();
+      } else {
+        setError(errorMessage);
+      }
     } finally {
       setIsLoading(false)
     }

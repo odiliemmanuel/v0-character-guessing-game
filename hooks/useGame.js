@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
-import { characters, shuffleArray, generateOptions } from '../lib/gameData';
+import { characters, shuffleArray, generateOptions } from '@/lib/gameData';
 
 const TIMER_DURATION = 15;
 const BASE_POINTS = 100;

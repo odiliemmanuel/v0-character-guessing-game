@@ -1,6 +1,6 @@
 "use client";
 
-import { useGame } from '../../hooks/useGame';
+import { useGame } from '@/hooks/useGame';
 import { StartScreen } from './StartScreen';
 import { PlayScreen } from './PlayScreen';
 import { GameOverScreen } from './GameOverScreen';

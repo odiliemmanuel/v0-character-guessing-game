@@ -6,18 +6,18 @@ export default function SignUpSuccessPage() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-logo">📧</div>
-          <h1 className="auth-title">Check Your Email</h1>
+          <div className="auth-logo">✅</div>
+          <h1 className="auth-title">Account Created!</h1>
           <p className="auth-description">
-            We&apos;ve sent you a confirmation link. Please check your email to verify your account.
+            Your account has been created successfully. You can now sign in with your email and password to play!
           </p>
         </div>
         <div className="auth-content">
           <p style={{ textAlign: 'center', color: '#666', marginBottom: '20px' }}>
-            After confirming your email, you can sign in to play the game.
+            If you received a confirmation email, click the link in it to fully activate your account. Otherwise, you can sign in directly.
           </p>
           <Link href="/auth/login" className="auth-button">
-            Back to Login
+            Go to Login
           </Link>
         </div>
       </div>
