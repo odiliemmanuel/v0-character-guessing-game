@@ -1,15 +1,25 @@
 "use client";
 
-import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { Game } from './Game';
 
-export function GameWrapper({ user }) {
+export function GameWrapper() {
   const router = useRouter();
+  const [userEmail, setUserEmail] = useState('');
 
-  const handleLogout = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
+  useEffect(() => {
+    // Get email from localStorage (set during login)
+    const email = localStorage.getItem('userEmail');
+    if (!email) {
+      router.push('/auth/login');
+    } else {
+      setUserEmail(email);
+    }
+  }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userEmail');
     router.push('/auth/login');
     router.refresh();
   };
@@ -23,15 +33,15 @@ export function GameWrapper({ user }) {
       <div className="user-header">
         <div className="user-info">
           <div className="user-avatar">
-            {getInitial(user.email)}
+            {getInitial(userEmail)}
           </div>
-          <span className="user-email">{user.email}</span>
+          <span className="user-email">{userEmail}</span>
         </div>
         <button onClick={handleLogout} className="logout-button">
           Sign Out
         </button>
       </div>
-      <Game />
+      {userEmail && <Game />}
     </div>
   );
 }

@@ -1,12 +1,10 @@
-import { updateSession } from '@/lib/supabase/middleware'
-import { type NextRequest } from 'next/server'
+// Middleware disabled - using localStorage for simple demo authentication
+// All routes are now public
 
-export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+export async function middleware() {
+  // No-op middleware - all routes accessible
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|characters|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
+  matcher: [],
 }
